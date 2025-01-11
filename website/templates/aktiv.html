@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}Aktiv werden{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Aktiv werden</h2>
+  <form action="/submit-form" method="post" enctype="multipart/form-data" class="p-4 rounded shadow bg-white">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label for="firstname">Vorname</label>
+          <input type="text" class="form-control" id="firstname" name="firstname" required>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-3">
+          <label for="lastname">Nachname</label>
+          <input type="text" class="form-control" id="lastname" name="lastname" required>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="email">E-Mail-Adresse</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="location">Standort</label>
+      <input type="text" class="form-control" id="location" name="location" required>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="birthdate">Geburtsdatum</label>
+      <input type="date" class="form-control" id="birthdate" name="birthdate" required min="1900-01-01" max="">
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="gender">Geschlecht</label>
+      <select class="form-control" id="gender" name="gender" required>
+        <option value="">Bitte auswählen</option>
+        <option value="male">Männlich</option>
+        <option value="female">Weiblich</option>
+        <option value="diverse">Divers</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="idUpload">Personalausweis hochladen</label>
+      <input type="file" class="form-control" id="idUpload" name="idUpload" accept="image/*,application/pdf" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Absenden</button>
+  </form>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const today = new Date();
+    const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    const birthdateInput = document.getElementById('birthdate');
+    birthdateInput.max = eighteenYearsAgo.toISOString().split('T')[0];
+  });
+</script>
+
+<style>
+  body {
+    background-color: #f3f4f6;
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    max-width: 700px;
+    margin: auto;
+  }
+  h2 {
+    color: #495057;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  form {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+  .form-group label {
+    font-weight: 600;
+    color: #333333;
+  }
+  .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  .btn {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+  }
+  .btn:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+{% endblock %}

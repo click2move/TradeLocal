@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Warenkorb{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="mb-4 text-center">Warenkorb</h2>
+  <div class="cart p-4 rounded shadow bg-white">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Bild</th>
+          <th>Produktname</th>
+          <th>Preis</th>
+          <th>Anzahl</th>
+          <th>Zwischensumme</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><img src="{{ url_for('static', filename='b1.jpg') }}" alt="Produktbild" class="cart-img"></td>
+          <td>Produkt 1</td>
+          <td>€10.00</td>
+          <td><input type="number" class="form-control quantity" min="1" value="1"></td>
+          <td class="subtotal">€10.00</td>
+        </tr>
+        <tr>
+          <td><img src="{{ url_for('static', filename='b2.jpg') }}" alt="Produktbild" class="cart-img"></td>
+          <td>Produkt 2</td>
+          <td>€20.00</td>
+          <td><input type="number" class="form-control quantity" min="1" value="1"></td>
+          <td class="subtotal">€20.00</td>
+        </tr>
+        <tr>
+          <td><img src="{{ url_for('static', filename='b3.jpg') }}" alt="Produktbild" class="cart-img"></td>
+          <td>Produkt 3</td>
+          <td>€15.00</td>
+          <td><input type="number" class="form-control quantity" min="1" value="1"></td>
+          <td class="subtotal">€15.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="form-group mb-3">
+      <label for="discountPoints">Rabattpunkte einsetzen</label>
+      <select class="form-control" id="discountPoints">
+        <option value="0">Keine Punkte einsetzen</option>
+        <option value="5">50 Punkte (5€ Rabatt)</option>
+        <option value="10">100 Punkte (10€ Rabatt)</option>
+      </select>
+    </div>
+
+    <div class="total-section text-end">
+      <p>Gesamtsumme: <span id="total">€45.00</span></p>
+      <button class="btn btn-primary" id="checkoutButton">Zur Kasse</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const userPoints = 100; // Replace with actual user points fetched from the profile.
+
+    const updateTotal = () => {
+      let total = 0;
+      document.querySelectorAll('.subtotal').forEach(subtotalCell => {
+        total += parseFloat(subtotalCell.textContent.replace('€', ''));
+      });
+
+      const discount = parseInt(document.getElementById('discountPoints').value) || 0;
+      total = Math.max(total - discount, 0);
+      document.getElementById('total').textContent = `€${total.toFixed(2)}`;
+    };
+
+    document.querySelectorAll('.quantity').forEach(input => {
+      input.addEventListener('input', (e) => {
+        const row = e.target.closest('tr');
+        const price = parseFloat(row.cells[2].textContent.replace('€', ''));
+        const quantity = parseInt(e.target.value) || 0;
+        row.cells[4].textContent = `€${(price * quantity).toFixed(2)}`;
+        updateTotal();
+      });
+    });
+
+    document.getElementById('discountPoints').addEventListener('change', (e) => {
+      const selectedDiscount = parseInt(e.target.value) || 0;
+      if (selectedDiscount * 10 > userPoints) {
+        alert('Sie haben nicht genügend Punkte, um diesen Rabatt einzusetzen.');
+        e.target.value = '0';
+      }
+      updateTotal();
+    });
+
+    document.getElementById('checkoutButton').addEventListener('click', () => {
+      const discount = parseInt(document.getElementById('discountPoints').value) || 0;
+      if (discount * 10 > userPoints) {
+        alert('Sie haben nicht genügend Punkte, um diesen Rabatt einzusetzen.');
+      } else {
+        alert('Zur Kasse fortfahren.');
+        // Additional checkout logic here.
+      }
+    });
+
+    updateTotal();
+  });
+</script>
+
+<style>
+  body {
+    background-color: #f3f4f6;
+    font-family: Arial, sans-serif;
+  }
+  .container {
+    max-width: 800px;
+    margin: auto;
+  }
+  h2 {
+    color: #495057;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .cart {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+  .cart-img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+  .table {
+    margin-bottom: 20px;
+  }
+  .form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  .btn {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+  }
+  .btn:hover {
+    background-color: #0056b3;
+  }
+  .total-section {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+</style>
+
+{% endblock %}
