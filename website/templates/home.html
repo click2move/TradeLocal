@@ -3,75 +3,21 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-
-
-<!-- Cards -->
-<div class="container mt-4">
+<div class="container mt-5"> <!-- Die Klasse mt-5 fügt einen oberen Abstand hinzu -->
   <div class="row">
-    <div class="col-md-4">
-      <div class="card">
-        <img class="card-img-top" src="{{ url_for('static', filename='b1.jpg') }}" alt="Produktbild">
+    {% for product in products %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow">
+        <img class="card-img-top" src="{{ url_for('static', filename=product.image_url) }}" alt="{{ product.name }}">
         <div class="card-body">
-          <h5 class="card-title">Produkt 1</h5>
-          <p class="card-text">Beschreibung des Produkts 1.</p>
-          <a href="#" class="btn btn-primary">Leihen</a>
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">{{ product.description }}</p>
+          <p class="card-text"><strong>{{ product.price }} €</strong> pro Stunde</p>
+          <a href="{{ url_for('views.produkt_detail', produkt_id=product.id) }}" class="btn btn-dark">Details ansehen</a>
         </div>
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="card">
-        <img class="card-img-top" src="{{ url_for('static', filename='b2.jpg') }}" alt="Produktbild">
-        <div class="card-body">
-          <h5 class="card-title">Produkt 2</h5>
-          <p class="card-text">Beschreibung des Produkts 2.</p>
-          <a href="#" class="btn btn-primary">Leihen</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <img class="card-img-top" src="{{ url_for('static', filename='b3.jpg') }}" alt="Produktbild">
-        <div class="card-body">
-          <h5 class="card-title">Produkt 3</h5>
-          <p class="card-text">Beschreibung des Produkts 3.</p>
-          <a href="#" class="btn btn-primary">Leihen</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Additional Cards -->
-  <div class="row mt-4">
-    <div class="col-md-4">
-      <div class="card">
-        <img class="card-img-top" src="{{ url_for('static', filename='b1.jpg') }}" alt="Handwerksgegenstand 1">
-        <div class="card-body">
-          <h5 class="card-title">Handwerksgegenstand 1</h5>
-          <p class="card-text">Beschreibung von Handwerksgegenstand 1.</p>
-          <a href="#" class="btn btn-primary">Leihen</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <img class="card-img-top" src="{{ url_for('static', filename='b2.jpg') }}" alt="Handwerksgegenstand 2">
-        <div class="card-body">
-          <h5 class="card-title">Handwerksgegenstand 2</h5>
-          <p class="card-text">Beschreibung von Handwerksgegenstand 2.</p>
-          <a href="#" class="btn btn-primary">Leihen</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <img class="card-img-top" src="{{ url_for('static', filename='b3.jpg') }}" alt="Handwerksgegenstand 3">
-        <div class="card-body">
-          <h5 class="card-title">Handwerksgegenstand 3</h5>
-          <p class="card-text">Beschreibung von Handwerksgegenstand 3.</p>
-          <a href="#" class="btn btn-primary">Leihen</a>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </div>
-
 {% endblock %}

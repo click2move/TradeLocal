@@ -19,10 +19,11 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    from .models import User, Note
-    
+    from .models import User  # Importiere nur User hier
+
     with app.app_context():
         db.create_all()
+        add_example_products()  # Beispielprodukte hinzufügen
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
@@ -39,3 +40,32 @@ def create_database(app):
     if not path.exists('website/' + DB_NAME):
         db.create_all(app=app)
         print('Created Database!')
+
+
+# Funktion zum Hinzufügen von Beispielprodukten
+def add_example_products():
+    from .models import Product  # Lokaler Import der Product-Klasse
+    if not Product.query.first():  # Prüft, ob bereits Produkte in der Datenbank existieren
+        example_products = [
+            Product(
+                name="Bohrmaschine",
+                description="Leistungsstarke Bohrmaschine für Heimwerker.",
+                price=15.0,
+                image_url="b1.jpg"
+            ),
+            Product(
+                name="Rasenmäher",
+                description="Perfekt für mittelgroße Gärten.",
+                price=20.0,
+                image_url="b2.jpg"
+            ),
+            Product(
+                name="Schubkarre",
+                description="Robuste Schubkarre für Gartenarbeiten.",
+                price=12.0,
+                image_url="b3.jpg"
+            )
+        ]
+        db.session.bulk_save_objects(example_products)  # Effizient mehrere Objekte speichern
+        db.session.commit()
+        print("Beispielprodukte wurden zur Datenbank hinzugefügt.")

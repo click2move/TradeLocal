@@ -3,24 +3,27 @@ from flask_login import current_user
 from .models import Note  # Modell für Notizen
 from . import db
 import json
-
+from .models import Product  # Import der Product-Klasse
 views = Blueprint('views', __name__)
 
 # Home-Route: Produktübersicht
+
 @views.route('/', methods=['GET', 'POST'])
 def home():
-    if request.method == 'POST': 
-        note = request.form.get('note')  # Für Notizen (falls weiterhin benötigt)
+    # Filterlogik (optional)
+    search = request.args.get('search', '')
+    category = request.args.get('category', '')
 
-        if len(note) < 1:
-            flash('Note is too short!', category='error') 
-        else:
-            new_note = Note(data=note, user_id=current_user.id)  # Note speichern
-            db.session.add(new_note)
-            db.session.commit()
-            flash('Note added!', category='success')
+    # Produkte aus der Datenbank abfragen
+    query = Product.query
+    if search:
+        query = query.filter(Product.name.contains(search) | Product.description.contains(search))
+    if category:
+        query = query.filter(Product.category == category)
 
-    return render_template("home.html", user=current_user)
+    products = query.all()
+    
+    return render_template("home.html", products=products)
 
 # Warenkorb-Route
 @views.route('/warenkorb')
