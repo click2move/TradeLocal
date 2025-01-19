@@ -1,0 +1,13 @@
+<div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <img class="img-fluid" src="{{ url_for('static', filename=produkt.image) }}" alt="{{ produkt.name }}">
+      </div>
+      <div class="col-md-6">
+        <h2>{{ produkt.name }}</h2>
+        <p>{{ produkt.description }}</p>
+        <p><strong>{{ produkt.price }}€ pro Stunde</strong></p>
+        <a href="/warenkorb" class="btn btn-primary">Zum Warenkorb hinzufügen</a>
+      </div>
+    </div>
+  </div>

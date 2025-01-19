@@ -50,8 +50,7 @@ def delete_note():
 
     return jsonify({})
 
-# Dummy-Route für zukünftige Produktdetails
 @views.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
-    # Beispiel: Lade später dynamische Inhalte basierend auf der Produkt-ID
-    return render_template('produkt_detail.html', produkt_id=produkt_id)
+    produkt = Product.query.get_or_404(produkt_id)
+    return render_template('produkt_detail.html', produkt=produkt)

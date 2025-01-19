@@ -10,6 +10,16 @@ class Note(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
 
+
+
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(150), nullable=False)
+    description = db.Column(db.String(500), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    image_url = db.Column(db.String(300), nullable=False)
+
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
