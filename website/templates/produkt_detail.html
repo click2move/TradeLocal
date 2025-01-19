@@ -1,72 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produktdetails</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .product-details {
-            margin-top: 30px;
-        }
-        .product-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .booking-card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
-        .btn-primary {
-            background-color: #000;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #333;
-        }
-    </style>
-</head>
-<body>
-    <div class="container product-details">
-        <div class="row">
-            <!-- Produktbild -->
-            <div class="col-md-6">
-                <img src="{{ url_for('static', filename=produkt.image_url) }}" alt="{{ produkt.name }}" class="product-image">
-            </div>
-            <!-- Details -->
-            <div class="col-md-6">
-                <h1>{{ produkt.name }}</h1>
-                <p>{{ produkt.description }}</p>
-                <p><strong>{{ produkt.price }}€ pro Stunde</strong></p>
+{% extends "base.html" %}
 
-                <!-- Buchungsformular -->
-                <div class="booking-card">
-                    <h5>Ausleihinformationen</h5>
-                    <form action="/warenkorb" method="POST">
-                        <div class="form-group">
-                            <label for="location">Ausleihort</label>
-                            <input type="text" id="location" name="location" class="form-control" placeholder="Standort eingeben" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="start_date">Abholen</label>
-                            <input type="date" id="start_date" name="start_date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="end_date">Zurückgeben</label>
-                            <input type="date" id="end_date" name="end_date" class="form-control" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-block">Zum Warenkorb hinzufügen</button>
-                    </form>
+{% block title %}Produktdetails{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Produktbild und Beschreibung -->
+        <div class="col-md-6">
+            <img class="img-fluid mb-3" src="{{ url_for('static', filename=produkt.image_url) }}" alt="{{ produkt.name }}">
+            <h4>Produktbeschreibung</h4>
+            <p>{{ produkt.description }}</p>
+        </div>
+
+        <!-- Ausleihinformationen -->
+        <div class="col-md-6">
+            <h2>{{ produkt.name }}</h2>
+            <p><strong>{{ produkt.price }} € pro Stunde</strong></p>
+            <form>
+                <div class="form-group">
+                    <label for="location">Ausleihort</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="location"
+                        value="{{ produkt.location }}"
+                        readonly
+                    />
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="pickup">Abholen</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        id="pickup"
+                        value="{{ current_date }}"
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="return">Zurückgeben</label>
+                    <input
+                        type="date"
+                        class="form-control"
+                        id="return"
+                        value="{{ current_date }}"
+                    />
+                </div>
+                <button type="submit" class="btn btn-dark">Zum Warenkorb hinzufügen</button>
+            </form>
         </div>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}
