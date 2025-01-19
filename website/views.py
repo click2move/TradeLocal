@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, flash, jsonify
 from flask_login import current_user
-from .models import Note  # Modell für Notizen
 from . import db
 import json
 from .models import Product  # Import der Product-Klasse
@@ -40,18 +39,6 @@ def aktiv():
 def kontakt():
     return render_template('kontakt2.html', user=current_user)
 
-# Route für das Löschen von Notizen (falls benötigt)
-@views.route('/delete-note', methods=['POST'])
-def delete_note():  
-    note = json.loads(request.data)  # JSON-Daten verarbeiten
-    noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
-        if note.user_id == current_user.id:
-            db.session.delete(note)
-            db.session.commit()
-
-    return jsonify({})
 
 @views.route('/produkt/<int:produkt_id>')
 def produkt_detail(produkt_id):
