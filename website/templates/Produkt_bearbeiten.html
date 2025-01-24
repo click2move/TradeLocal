@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produktdetails bearbeiten</title>
+    <style>
+        /* Grundlegende Stile für Produktdetails bearbeiten */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+ 
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+ 
+        h2 {
+            color: #222;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+ 
+        .form-group {
+            margin-bottom: 20px;
+        }
+ 
+        label {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+ 
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+ 
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 6px rgba(26, 115, 232, 0.3);
+        }
+ 
+        button {
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+ 
+        button:hover {
+            background-color: #1558c9;
+            transform: translateY(-2px);
+        }
+ 
+        button:active {
+            background-color: #1348a9;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Produktdetails bearbeiten</h2>
+        <form onsubmit="event.preventDefault(); saveProduct()">
+            <div class="form-group">
+                <label for="product-name">Produktname</label>
+                <input type="text" id="product-name" placeholder="Produktname eingeben" required>
+            </div>
+            <div class="form-group">
+                <label for="product-price">Preis (€ pro Stunde)</label>
+                <input type="number" id="product-price" placeholder="Preis eingeben" required>
+            </div>
+            <div class="form-group">
+                <label for="product-location">Ausleihort</label>
+                <input type="text" id="product-location" placeholder="Ausleihort eingeben" required>
+            </div>
+            <button type="submit">Speichern</button>
+        </form>
+    </div>
+ 
+    <script>
+        function saveProduct() {
+            const name = document.getElementById('product-name').value;
+            const price = document.getElementById('product-price').value;
+            const location = document.getElementById('product-location').value;
+            alert(`Produkt gespeichert:\nName: ${name}\nPreis: ${price} €\nAusleihort: ${location}`);
+        }
+    </script>
+</body>
+</html>

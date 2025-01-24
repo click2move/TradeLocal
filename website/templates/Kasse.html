@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webshop - Kasse</title>
+    <style>
+        /* Grundlegende Stile */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+ 
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+ 
+        h2, h3 {
+            color: #222;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+ 
+        /* Layout */
+        .checkout-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #e0e0e0;
+        }
+ 
+        .checkout-header h2 {
+            font-size: 2rem;
+        }
+ 
+        .checkout-header a {
+            text-decoration: none;
+            color: #1a73e8;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+ 
+        .checkout-header a:hover {
+            text-decoration: underline;
+        }
+ 
+        .checkout-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            gap: 20px;
+        }
+ 
+        .checkout-summary,
+        .checkout-form {
+            flex: 1;
+            min-width: 350px;
+            padding: 30px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background-color: #f9f9fb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+ 
+        .checkout-summary {
+            background: linear-gradient(135deg, #ece9e6, #ffffff);
+        }
+ 
+        /* Formularelemente */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+ 
+        label {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+ 
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+ 
+        input:focus, select:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 6px rgba(26, 115, 232, 0.3);
+        }
+ 
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #1a73e8;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+ 
+        button:hover {
+            background-color: #1558c9;
+            transform: translateY(-2px);
+        }
+ 
+        button:active {
+            background-color: #1348a9;
+            transform: translateY(0);
+        }
+ 
+        /* Zusammenfassung */
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+ 
+        .summary-item span {
+            font-weight: bold;
+        }
+ 
+        .total {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            border-top: 2px solid #ddd;
+            padding-top: 10px;
+            text-align: right;
+            color: #333;
+            font-weight: bold;
+        }
+ 
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .checkout-content {
+                flex-direction: column;
+            }
+ 
+            .checkout-summary,
+            .checkout-form {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="checkout-header">
+            <h2>Zur Kasse</h2>
+            <a href="#" onclick="alert('Zurück zum Shop!')">Zurück zum Shop</a>
+        </header>
+ 
+        <main class="checkout-content">
+            <!-- Bestellübersicht -->
+            <section class="checkout-summary">
+                <h3>Bestellübersicht</h3>
+                <div class="summary-item">
+                    <span>Produkt 1</span>
+                    <span>25,00 €</span>
+                </div>
+                <div class="summary-item">
+                    <span>Produkt 2</span>
+                    <span>15,00 €</span>
+                </div>
+                <div class="total">
+                    Gesamt: 40,00 €
+                </div>
+                <button onclick="alert('Weiter zur Zahlung!')">Zur Zahlung</button>
+            </section>
+ 
+            <!-- Lieferformular -->
+            <section class="checkout-form">
+                <h3>Lieferadresse</h3>
+                <form onsubmit="event.preventDefault(); alert('Bestellung erfolgreich abgeschickt!')">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Ihr Name" required>
+                    
+                    <label for="address">Adresse</label>
+                    <input type="text" id="address" name="address" placeholder="Ihre Adresse" required>
+                    
+                    <label for="city">Stadt</label>
+                    <input type="text" id="city" name="city" placeholder="Ihre Stadt" required>
+                    
+                    <label for="zip">Postleitzahl</label>
+                    <input type="text" id="zip" name="zip" placeholder="Ihre Postleitzahl" required>
+                    
+                    <button type="submit">Bestellung abschicken</button>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

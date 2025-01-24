@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produkte bearbeiten</title>
+    <style>
+        /* Grundlegende Stile für Produkte bearbeiten */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+ 
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+ 
+        h2 {
+            color: #222;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+ 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+ 
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+ 
+        table th {
+            background-color: #f4f4f9;
+            color: #333;
+        }
+ 
+        button {
+            padding: 10px 20px;
+            background-color: #1a73e8;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+ 
+        button:hover {
+            background-color: #1558c9;
+            transform: translateY(-2px);
+        }
+ 
+        button:active {
+            background-color: #1348a9;
+            transform: translateY(0);
+        }
+ 
+        .delete-btn {
+            background-color: #e74c3c;
+        }
+ 
+        .delete-btn:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Produkte bearbeiten</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produktname</th>
+                    <th>Preis (€ pro Stunde)</th>
+                    <th>Ausleihort</th>
+                    <th>Aktionen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kamera</td>
+                    <td>10</td>
+                    <td>Berlin</td>
+                    <td>
+                        <button onclick="editProduct('Kamera', '10', 'Berlin')">Bearbeiten</button>
+                        <button class="delete-btn" onclick="deleteProduct()">Löschen</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Stativ</td>
+                    <td>5</td>
+                    <td>Hamburg</td>
+                    <td>
+                        <button onclick="editProduct('Stativ', '5', 'Hamburg')">Bearbeiten</button>
+                        <button class="delete-btn" onclick="deleteProduct()">Löschen</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ 
+    <script>
+        function editProduct(name, price, location) {
+            alert(`Produkt zum Bearbeiten:\nName: ${name}\nPreis: ${price} €\nAusleihort: ${location}`);
+        }
+ 
+        function deleteProduct() {
+            if (confirm('Möchtest du dieses Produkt wirklich löschen?')) {
+                alert('Produkt gelöscht.');
+            }
+        }
+    </script>
+</body>
+</html>

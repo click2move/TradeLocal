@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil bearbeiten</title>
+    <style>
+        /* Grundlegende Stile */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+ 
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+ 
+        h2, h4 {
+            color: #222;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+ 
+        /* Formular und Layout */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+ 
+        label {
+            font-weight: bold;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+ 
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+ 
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #1a73e8;
+            box-shadow: 0 0 6px rgba(26, 115, 232, 0.3);
+        }
+ 
+        button {
+            padding: 12px 20px;
+            background-color: #1a73e8;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+ 
+        button:hover {
+            background-color: #1558c9;
+            transform: translateY(-2px);
+        }
+ 
+        button:active {
+            background-color: #1348a9;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Profil bearbeiten</h2>
+        <form onsubmit="event.preventDefault(); alert('Profil gespeichert!')">
+            <!-- Benutzerinformationen -->
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Dein Name" value="Max Mustermann" required>
+            </div>
+            <div class="form-group">
+                <label for="email">E-Mail-Adresse</label>
+                <input type="email" id="email" placeholder="Deine E-Mail" value="max@beispiel.de" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Wohnort</label>
+                <input type="text" id="location" placeholder="Dein Wohnort" value="Berlin" required>
+            </div>
+ 
+            <!-- Passwort ändern -->
+            <h4>Passwort ändern</h4>
+            <div class="form-group">
+                <label for="old-password">Aktuelles Passwort</label>
+                <input type="password" id="old-password" placeholder="Aktuelles Passwort" required>
+            </div>
+            <div class="form-group">
+                <label for="new-password">Neues Passwort</label>
+                <input type="password" id="new-password" placeholder="Neues Passwort" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm-password">Neues Passwort bestätigen</label>
+                <input type="password" id="confirm-password" placeholder="Passwort bestätigen" required>
+            </div>
+ 
+            <!-- Absenden -->
+            <button type="submit">Änderungen speichern</button>
+        </form>
+    </div>
+</body>
+</html>
+has context menu
